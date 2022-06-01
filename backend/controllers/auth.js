@@ -70,3 +70,17 @@ exports.login = (req, res) => {
       );
   });
 };
+
+exports.currentUser = (req, res) => {
+  const { userId } = req.auth;
+
+  let sql = `SELECT * FROM user WHERE id=?`;
+  pool.execute(sql, [userId], function (err, result) {
+    let user = result[0];
+    if (!user) return res.status(401).json({ error: "User doesn't exist" });
+
+    const { password, ...rest } = user;
+
+    return res.status(200).json({ ...rest });
+  });
+};

@@ -2,6 +2,8 @@ const express = require("express");
 const urlencoded = require("express");
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/post");
+const commentRoutes = require("./routes/comment");
+const likeRoutes = require("./routes/like");
 const cors = require("cors");
 const verifyAuthorization = require("./middlewares/verifyAuthorization");
 
@@ -25,6 +27,8 @@ app.use("/api/auth", authRoutes);
 // Vérification des tokens d'authentification
 app.use(verifyAuthorization);
 app.use("/api/posts", postRoutes);
+app.use("/api/comments", commentRoutes);
+app.use("/api/likes", likeRoutes);
 
 // Routes users
 // app.use("/api/auth", authRoutes);

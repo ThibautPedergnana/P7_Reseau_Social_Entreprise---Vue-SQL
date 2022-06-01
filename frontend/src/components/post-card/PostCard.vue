@@ -5,24 +5,45 @@
         <v-avatar>
           <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
         </v-avatar>
-        <v-textarea solo name="input-7-4" label="Quoi de neuf ?"></v-textarea>
+        <v-textarea
+          v-model="text"
+          solo
+          name="input-7-4"
+          label="Quoi de neuf ?"
+        ></v-textarea>
       </div>
     </v-card-text>
     <v-card-actions>
-      <v-btn text color="teal accent-4" @click="reveal = true"> Publier </v-btn>
+      <v-btn text color="teal accent-4" @click="submit"> Publier </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import { createPost } from "../../services/postService";
 // import axios from "axios";
 
 export default {
   name: "PostCard",
   data() {
-    return {};
+    return {
+      text: "",
+    };
   },
-  methods: {},
+  methods: {
+    async submit() {
+      try {
+        await createPost({ text: this.text });
+        this.text = "";
+        this.refresh();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    refresh() {
+      this.$emit("refresh");
+    },
+  },
 };
 </script>
 

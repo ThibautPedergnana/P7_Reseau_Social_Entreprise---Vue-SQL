@@ -5,6 +5,7 @@ import router from "./router";
 import vuetify from "./plugins/vuetify";
 import NoSideBar from "./layouts/NoSideBar.vue";
 import DefaultLayout from "./layouts/DefaultLayout.vue";
+import "./plugins/filters";
 
 Vue.component("nosidebar-layout", NoSideBar);
 Vue.component("default-layout", DefaultLayout);

@@ -142,10 +142,17 @@ export default {
       showLogin: true,
     };
   },
+  mounted() {
+    const token = localStorage.auth;
+    if (token) {
+      this.$router.push("/app/wall");
+    }
+  },
   methods: {
     switchToSignup() {
       this.showLogin = !this.showLogin;
     },
+
     validation() {
       let validEmail = new RegExp(
         /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/

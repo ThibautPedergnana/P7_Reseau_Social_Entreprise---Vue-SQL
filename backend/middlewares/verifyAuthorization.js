@@ -7,11 +7,11 @@ module.exports = (req, res, next) => {
     const userId = decodedToken.userId;
     req.auth = { userId };
 
-    if (req.body.userId && req.body.userId != userId) {
-      return res.status(403).json("Forbidden");
-    } else {
-      next();
-    }
+    // if (req.body.userId && req.body.userId != userId) {
+    //   return res.status(403).json("Forbidden");
+    // } else {
+    // }
+    next();
   } catch (e) {
     res.status(401).json({ error: "Unauthorized!" });
   }
