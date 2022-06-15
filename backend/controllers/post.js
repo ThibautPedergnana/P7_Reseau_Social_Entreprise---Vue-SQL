@@ -1,5 +1,4 @@
 const { pool } = require("../config/db");
-const fs = require("fs");
 
 exports.getAll = (req, res, next) => {
   let sql =
@@ -26,20 +25,6 @@ exports.getOne = (req, res, next) => {
     const { admin, desc, email, password, ...post } = result[0];
 
     res.status(200).json(post);
-  });
-};
-
-exports.getAll = (req, res, next) => {
-  let sql =
-    "SELECT * FROM post JOIN user WHERE user.id=authorId ORDER BY date DESC LIMIT 50;";
-  pool.execute(sql, function (err, result) {
-    if (err) res.status(400).json({ err });
-
-    const posts = result.map((res) => {
-      const { admin, desc, email, password, ...rest } = res;
-      return rest;
-    });
-    res.status(200).json(posts);
   });
 };
 

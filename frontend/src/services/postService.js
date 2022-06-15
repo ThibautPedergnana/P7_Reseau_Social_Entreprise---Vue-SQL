@@ -23,4 +23,10 @@ function deletePost(postId) {
     .then((response) => response);
 }
 
-export { getPosts, getOnePost, deletePost, createPost };
+const getUserPosts = async (userId) => {
+  return axios
+    .get(getBaseUrl() + "users/" + userId + "/posts")
+    .then((response) => response.data);
+};
+
+export { getPosts, getOnePost, deletePost, createPost, getUserPosts };

@@ -1,7 +1,7 @@
 <template>
   <div class="news-card-container">
     <v-card class="mx-auto news-card" color="#26c6da" dark>
-      <v-card-title>
+      <v-card-title class="top-part">
         <v-list-item-avatar color="grey darken-3">
           <v-img
             class="elevation-6"
@@ -12,9 +12,17 @@
 
         <v-list-item-content>
           <v-list-item-title>{{
-            `${postData.nom} ${postData.prenom}`
+            `${postData.lastname} ${postData.firstname}`
           }}</v-list-item-title>
         </v-list-item-content>
+        <v-icon
+          class="btn-cancel"
+          v-show="user.id === postData.authorId"
+          color="error"
+          @click="deleteMyPost()"
+        >
+          mdi-cancel
+        </v-icon>
       </v-card-title>
 
       <v-card-text class="text-h5 font-weight-bold">
@@ -22,26 +30,18 @@
       </v-card-text>
 
       <v-card-actions>
-        <v-list-item class="grow">
+        <v-list-item class="grow content-input">
           {{ postData.date | formatDate }}
-
-          <v-btn
-            v-show="user.id === postData.authorId"
-            color="error"
-            @click="deleteMyPost()"
-          >
-            Supprimer
-          </v-btn>
         </v-list-item>
       </v-card-actions>
     </v-card>
     <div class="comments-container">
       <div class="icons-container">
         <div class="icon-block" @click="applyLike">
-          <v-icon class="mr-1" v-show="!alreadyLiked">
+          <v-icon class="mr-1 heart" v-show="!alreadyLiked">
             mdi-heart-outline
           </v-icon>
-          <v-icon class="mr-1" v-show="alreadyLiked"> mdi-heart </v-icon>
+          <v-icon class="mr-1 heart" v-show="alreadyLiked"> mdi-heart </v-icon>
           <span>{{ postData.like }}</span>
         </div>
         <div class="icon-block">
@@ -152,9 +152,15 @@ export default {
   .news-card {
     margin-top: 30px;
     height: 200px;
-    .content-input {
-      display: flex;
-      justify-content: center;
+    .top-part {
+      padding: 8px;
+      .btn-cancel {
+        font-size: 18px;
+        color: gray !important;
+        &:hover {
+          color: #ff5252 !important;
+        }
+      }
     }
   }
   .comments-container {
@@ -168,6 +174,9 @@ export default {
       margin-bottom: 10px;
       .icon-block {
         display: flex;
+        .heart {
+          cursor: pointer;
+        }
         span {
           margin-left: 7px;
         }

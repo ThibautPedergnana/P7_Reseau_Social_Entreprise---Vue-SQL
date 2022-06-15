@@ -3,6 +3,7 @@ const urlencoded = require("express");
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/post");
 const commentRoutes = require("./routes/comment");
+const userRoutes = require("./routes/user");
 const likeRoutes = require("./routes/like");
 const cors = require("cors");
 const verifyAuthorization = require("./middlewares/verifyAuthorization");
@@ -29,6 +30,7 @@ app.use(verifyAuthorization);
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/likes", likeRoutes);
+app.use("/api/users", userRoutes);
 
 // Routes users
 // app.use("/api/auth", authRoutes);

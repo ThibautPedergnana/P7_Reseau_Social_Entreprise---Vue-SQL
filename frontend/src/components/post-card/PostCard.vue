@@ -1,6 +1,6 @@
 <template>
   <v-card class="mx-auto post-card">
-    <v-card-text>
+    <v-card-text class="text-area">
       <div class="content-input">
         <v-avatar>
           <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
@@ -9,13 +9,16 @@
           v-model="text"
           solo
           name="input-7-4"
+          rows="2"
           label="Quoi de neuf ?"
+          clearable
+          no-resize
         ></v-textarea>
       </div>
+      <v-card-actions class="btn-container">
+        <v-btn class="btn" text @click="submit"> Publier </v-btn>
+      </v-card-actions>
     </v-card-text>
-    <v-card-actions>
-      <v-btn text color="teal accent-4" @click="submit"> Publier </v-btn>
-    </v-card-actions>
   </v-card>
 </template>
 
@@ -49,23 +52,22 @@ export default {
 
 <style lang="scss" scoped>
 .post-card {
-  height: 200px;
-  .content-input {
+  .text-area {
+    padding-bottom: 0;
+    .content-input {
+      display: flex;
+      justify-content: center;
+      border-bottom: solid 1px #0000002f;
+    }
+  }
+  .btn-container {
     display: flex;
-    justify-content: center;
+    justify-content: right;
+    .btn {
+      color: #fff;
+      background: #5fbae9;
+    }
   }
-}
-.v-textarea {
-  .v-input__control {
-    height: 100px;
-  }
-}
-.v-text-field.v-text-field--enclosed {
-  padding-left: 20px;
-}
-.v-input__control {
-  min-height: 30px !important;
-  height: 30px !important;
 }
 .v-text-field.v-text-field--enclosed {
   padding-left: 20px;

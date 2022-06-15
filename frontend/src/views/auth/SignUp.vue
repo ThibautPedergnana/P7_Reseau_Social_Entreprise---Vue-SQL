@@ -22,8 +22,8 @@
               v-show="!showLogin"
               class="input-form input-signup lastname-signup"
               type="text"
-              id="nom"
-              name="nom"
+              id="lastname"
+              name="lastname"
               placeholder="Votre nom"
               v-model="name"
               required
@@ -35,8 +35,8 @@
               v-show="!showLogin"
               class="input-form input-signup firstname-signup"
               type="text"
-              id="prenom"
-              name="prenom"
+              id="firstname"
+              name="firstname"
               placeholder="Votre prenom"
               v-model="firstname"
               required
@@ -186,8 +186,8 @@ export default {
     async signup() {
       if (this.validation()) {
         await signup({
-          nom: this.name,
-          prenom: this.firstname,
+          lastname: this.name,
+          firstname: this.firstname,
           email: this.emailRegister,
           password: this.passwordRegister,
         });
@@ -226,6 +226,8 @@ export default {
   color: red;
 }
 .icon {
+  display: flex;
+  justify-content: center;
   height: 225px;
 }
 .icon-name {
