@@ -8,8 +8,10 @@
         persistent="false"
       >
         <v-card>
-          <v-toolbar color="primary" dark>Modifier votre profil</v-toolbar>
-          <v-card-text>
+          <v-toolbar class="top-part" color="#1d9bf0" dark
+            >Modifier votre profil</v-toolbar
+          >
+          <v-card-text class="form">
             <input
               v-show="action === 'account'"
               class="input-form input-signup firstname-signup"
@@ -70,6 +72,14 @@
               required
             />
             <div class="confirm-password-container">
+              <div
+                v-show="isValidPassword && action === 'password'"
+                class="circle valid"
+              ></div>
+              <div
+                v-show="!isValidPassword && action === 'password'"
+                class="circle invalid"
+              ></div>
               <input
                 v-show="action === 'password'"
                 class="input-form"
@@ -79,25 +89,13 @@
                 placeholder="Confirmation du mot de passe"
                 required
               />
-              <div
-                v-show="isValidPassword && action === 'password'"
-                class="circle valid"
-              ></div>
-              <div
-                v-show="!isValidPassword && action === 'password'"
-                class="circle invalid"
-              ></div>
               <span class="error-password" v-if="showErrorPassword"
                 >Votre mot de passe actuel est incorrect !</span
               >
             </div>
           </v-card-text>
-          <v-card-actions class="justify-end">
-            <div class="btn-section">
-              <v-btn text color="error" @click="action = 'delete'"
-                >Supprimer</v-btn
-              >
-              <v-btn text @click="closeModal">Retour</v-btn>
+          <v-card-actions class="btn-section">
+            <div class="top-btn">
               <v-btn
                 color="success"
                 text
@@ -110,6 +108,12 @@
                 "
                 >{{ getTitleBtn }}</v-btn
               >
+              <v-btn text color="error" @click="action = 'delete'"
+                >Supprimer votre compte</v-btn
+              >
+            </div>
+            <div class="bottom-btn">
+              <v-btn text @click="closeModal">Retour</v-btn>
               <v-btn
                 color="success"
                 text
@@ -216,27 +220,49 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.input-form {
-  background: #cccccc;
-  border: none;
-  border-radius: 5px;
-  margin: 15px 6px 5px 6px;
-  padding: 15px;
-  width: 50%;
+.top-part {
+  margin-bottom: 10px;
 }
-.input-form:focus {
-  background: #fff;
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .input-form {
+    background: #cccccc;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 6px 10px 6px;
+    padding: 15px;
+    width: 50%;
+  }
+  .input-form:focus {
+    background: #fff;
+  }
+  .lastname-signup {
+    grid-column: 2 / 12;
+    grid-row: 1;
+  }
+  .firstname-signup {
+    grid-column: 2 / 12;
+    grid-row: 2;
+  }
+  .email-signup {
+    grid-column: 2 / 12;
+    grid-row: 3;
+  }
 }
-
 .confirm-password-container {
   position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: -8px;
   .circle {
     width: 15px;
     height: 15px;
-    position: absolute;
-    bottom: 20px;
-    left: -20px;
     border-radius: 50%;
+
     &.invalid {
       background-color: indianred;
     }
@@ -249,6 +275,22 @@ export default {
     bottom: -20px;
     left: 6px;
     color: indianred;
+  }
+}
+.v-dialog > .v-card > .v-card__actions {
+  padding: 0 16px 8px;
+}
+.btn-section {
+  display: flex;
+  flex-direction: column;
+  .top-btn {
+    display: flex;
+    flex-direction: column;
+  }
+  .bottom-btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
   }
 }
 </style>

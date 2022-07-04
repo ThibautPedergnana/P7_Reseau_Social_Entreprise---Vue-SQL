@@ -32,4 +32,17 @@ const deleteUser = async (body) => {
     .then((response) => response.data);
 };
 
-export { getUser, updateAccount, updatePassword, search, deleteUser };
+const patchImage = async (body) => {
+  return axios
+    .patch(getBaseUrl() + "users/image", body)
+    .then((response) => response.data);
+};
+
+export {
+  getUser,
+  updateAccount,
+  updatePassword,
+  search,
+  deleteUser,
+  patchImage,
+};

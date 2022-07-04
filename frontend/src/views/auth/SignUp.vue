@@ -74,7 +74,7 @@
               v-show="showLogin"
               class="input-form email-login"
               type="text"
-              name="email"
+              name="mail"
               v-model="email"
               placeholder="Votre email"
               required
@@ -83,7 +83,7 @@
               v-show="showLogin"
               class="input-form password-login"
               type="password"
-              name="password"
+              name="pass"
               v-model="password"
               placeholder="Mot de passe"
               required
@@ -221,9 +221,11 @@ export default {
 <style lang="scss" scoped>
 .red {
   color: red;
+  background-color: white;
 }
 .error {
   color: red;
+  background-color: white;
 }
 .icon {
   display: flex;
@@ -241,7 +243,7 @@ form {
 .form-header {
   padding: 25px;
   background-color: #f6f6f6;
-  border-top: 1px solid #dce8f1;
+  border-top: 1px solid f6f6f6;
   text-align: center;
   -webkit-border-radius: 0 0 10px 10px;
   border-radius: 10px 10px 0 0;
@@ -256,7 +258,7 @@ form {
 .btn-form {
   background: #fff;
   border: 0;
-  color: #5fbae9;
+  color: #1d9bf0;
   font-size: 1rem;
   cursor: pointer;
 }
@@ -293,7 +295,7 @@ h2 {
   font-size: 0.9rem;
   margin: 20px 0 20px 0;
   padding: 10px 30px 10px 30px;
-  background-color: #5fbae9;
+  background-color: #1d9bf0;
   border: none;
   border-radius: 5px;
   color: white;
@@ -321,6 +323,6 @@ h2.inactive {
 }
 h2.active {
   color: #0d0d0d;
-  border-bottom: 2px solid #5fbae9;
+  border-bottom: 2px solid #1d9bf0;
 }
 </style>

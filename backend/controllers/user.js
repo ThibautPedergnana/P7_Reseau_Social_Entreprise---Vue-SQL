@@ -1,5 +1,6 @@
 const { pool } = require("../config/db");
 const bcrypt = require("bcrypt");
+const fs = require("fs");
 
 exports.getAll = (req, res, next) => {
   const search = "%" + req.query.search + "%";
@@ -25,7 +26,7 @@ exports.getPostsByUser = (req, res, next) => {
     if (err) res.status(400).json({ err });
 
     const posts = result.map((res) => {
-      const { admin, desc, email, password, ...rest } = res;
+      const { admin, email, password, ...rest } = res;
       return rest;
     });
     res.status(200).json(posts);
@@ -40,7 +41,7 @@ exports.getOne = (req, res, next) => {
     if (err) res.status(400).json({ err });
 
     if (!result[0]) res.status(404);
-    const { password, desc, admin, ...user } = result[0];
+    const { password, admin, ...user } = result[0];
 
     res.status(200).json(user);
   });
@@ -150,9 +151,17 @@ exports.delete = (req, res, next) => {
         return res.status(401).json({ error: " Mot de passe incorrect !" });
 
       let sql = `DELETE FROM user WHERE id=?`;
-      pool.execute(sql, [userId], function (err, result) {
+      pool.execute(sql, [userId], function (err, resp) {
         if (err) throw err;
-
+        if (
+          result[0].pp &&
+          !result[0].pp != `${req.protocol}://${req.get("host")}/images/pp.png`
+        ) {
+          const name = result[0].pp.split("/images/")[1];
+          fs.unlink(`images/${name}`, () => {
+            if (err) console.log(err);
+          });
+        }
         res.status(200).json({
           message: `Compte numéro ${userId} supprimé`,
         });
@@ -160,5 +169,41 @@ exports.delete = (req, res, next) => {
     });
   } catch (error) {
     res.status(500);
+  }
+};
+
+exports.modifyPP = (req, res, next) => {
+  const { userId } = req.auth;
+  if (req.file) {
+    let sql = `SELECT * FROM user WHERE id = ?`;
+    pool.execute(sql, [userId], function (err, result) {
+      if (err) return res.status(400).json({ err });
+      if (!result[0])
+        return res
+          .status(404)
+          .json({ message: "Aucun id ne correspond dans la table" });
+      const user = result[0];
+
+      // SI LE USER A UNE IMAGE, LA SUPPRIMER DU DOSSIER IMAGES/PROFILE
+      if (user.pp != `${req.protocol}://${req.get("host")}/images/pp.png`) {
+        const name = user.pp.split("/images/")[1];
+        fs.unlink(`images/${name}`, () => {
+          if (err) console.log(err);
+        });
+      }
+      // RECUPERE LES INFOS ENVOYER PAR LE FRONT
+      let image = req.file
+        ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+        : "";
+      // UPDATE LA DB
+      let sql2 = `UPDATE user
+              SET pp = ?
+              WHERE id = ?`;
+      pool.execute(sql2, [image, userId], function (err, result) {
+        if (err) throw err;
+        user.pp = image;
+        res.status(200).json(user);
+      });
+    });
   }
 };

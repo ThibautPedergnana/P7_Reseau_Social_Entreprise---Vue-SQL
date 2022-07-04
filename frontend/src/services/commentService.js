@@ -13,4 +13,10 @@ function createComment(body) {
     .then((response) => response.data);
 }
 
-export { getPostComments, createComment };
+function deleteComment(id) {
+  return axios
+    .delete(getBaseUrl() + "comments/" + id)
+    .then((response) => response.data);
+}
+
+export { getPostComments, createComment, deleteComment };

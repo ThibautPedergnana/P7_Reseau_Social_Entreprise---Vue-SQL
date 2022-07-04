@@ -10,25 +10,29 @@ exports.register = (req, res) => {
       bcrypt
         .hash(req.body.password, 10)
         .then((hash) => {
-          const image = `${req.protocol}://${req.get(
-            "host"
-          )}/images/profile/pp.png`;
+          const image = `${req.protocol}://${req.get("host")}/images/pp.png`;
           const user = {
-            nom: req.body.nom,
-            prenom: req.body.prenom,
+            lastname: req.body.lastname,
+            firstname: req.body.firstname,
             email: req.body.email,
             password: hash,
             imageUrl: image,
           };
-          let sql = `INSERT INTO user (nom, prenom, email, password, pp) VALUES (?,?,?,?,?)`;
+          let sql = `INSERT INTO user (lastname, firstname, email, password, pp) VALUES (?,?,?,?,?)`;
           pool.execute(
             sql,
-            [user.nom, user.prenom, user.email, user.password, user.imageUrl],
+            [
+              user.lastname,
+              user.firstname,
+              user.email,
+              user.password,
+              user.imageUrl,
+            ],
             function (err, result) {
               if (err) throw err;
               res.status(201).json({
                 token: jwt.sign(
-                  { userId: user.id },
+                  { userId: user.id, isAdmin: user.admin },
                   process.env.SECRET_TOKEN_KEY,
                   {
                     expiresIn: "24h",
@@ -57,12 +61,15 @@ exports.login = (req, res) => {
         if (!valid) {
           return res.status(401).json({ error: " Mot de passe incorrect !" });
         }
-        console.log("utilisateur connecté");
         res.status(200).json({
           userId: user.id,
-          token: jwt.sign({ userId: user.id }, process.env.SECRET_TOKEN_KEY, {
-            expiresIn: "24h",
-          }),
+          token: jwt.sign(
+            { userId: user.id, isAdmin: user.admin },
+            process.env.SECRET_TOKEN_KEY,
+            {
+              expiresIn: "24h",
+            }
+          ),
         });
       })
       .catch((error) =>

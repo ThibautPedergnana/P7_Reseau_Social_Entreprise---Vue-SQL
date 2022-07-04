@@ -20,7 +20,7 @@ export default {
 
 <style lang="scss" scoped>
 .template-base {
-  background-color: rgb(247, 247, 247);
+  background-color: #efefef;
   display: flex;
   justify-content: center;
   padding: 30px 0;
