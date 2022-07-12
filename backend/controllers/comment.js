@@ -1,7 +1,7 @@
 const { pool } = require("../config/db");
 
+// Création d'un commentaire
 exports.create = (req, res, next) => {
-  // DEFINI LES CHAMPS REMPLI
   const { userId } = req.auth;
 
   const comment = {
@@ -25,6 +25,7 @@ exports.create = (req, res, next) => {
   );
 };
 
+// Supression d'un commentaire
 exports.delete = (req, res, next) => {
   const { id } = req.params;
   const { userId, isAdmin } = req.auth;

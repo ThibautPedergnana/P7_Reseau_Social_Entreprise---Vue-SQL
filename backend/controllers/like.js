@@ -1,7 +1,7 @@
 const { pool } = require("../config/db");
 
+// Récupérer les likes de tout les posts
 exports.like = (req, res, next) => {
-  // TOUT LES POST DU DERNIER AU PREMIER
   const { userId } = req.auth;
   const { postId } = req.body;
 

@@ -2,6 +2,7 @@ const { pool } = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+// Inscription
 exports.register = (req, res) => {
   let sql = `SELECT * FROM user WHERE email=?`;
   pool.execute(sql, [req.body.email], function (err, result) {
@@ -50,6 +51,7 @@ exports.register = (req, res) => {
   });
 };
 
+// Connexion
 exports.login = (req, res) => {
   let sql = `SELECT * FROM user WHERE email=?`;
   pool.execute(sql, [req.body.email], function (err, result) {
@@ -78,6 +80,7 @@ exports.login = (req, res) => {
   });
 };
 
+// Vérification de l'utilisateur connecté
 exports.currentUser = (req, res) => {
   const { userId } = req.auth;
 

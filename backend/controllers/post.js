@@ -1,6 +1,7 @@
 const { pool } = require("../config/db");
 const fs = require("fs");
 
+// Récupérer tout les posts
 exports.getAll = (req, res, next) => {
   let sql =
     "SELECT * FROM post JOIN user WHERE user.id=authorId ORDER BY date DESC LIMIT 50;";
@@ -15,6 +16,7 @@ exports.getAll = (req, res, next) => {
   });
 };
 
+// Récupérer un post
 exports.getOne = (req, res, next) => {
   const { id } = req.params;
   let sql =
@@ -28,6 +30,7 @@ exports.getOne = (req, res, next) => {
   });
 };
 
+// Récupérer tout les commentaires
 exports.getComments = (req, res, next) => {
   const { id } = req.params;
   let sql =
@@ -43,6 +46,7 @@ exports.getComments = (req, res, next) => {
   });
 };
 
+// Création d'un post
 exports.create = (req, res, next) => {
   const { userId } = req.auth;
 
@@ -59,7 +63,7 @@ exports.create = (req, res, next) => {
     authorId: userId,
   };
 
-  //ENVOIE LA REQUETE AVEC MULTER ET LES VALEURS PAR DEFAUT
+  // Envoie la requête avec multer et les valeurs par défaut
   let sql = `INSERT INTO post (text, date, imageUrl, authorId) VALUES (?,?,?,?);`;
   pool.execute(
     sql,
@@ -71,6 +75,7 @@ exports.create = (req, res, next) => {
   );
 };
 
+// Supprimer un post
 exports.delete = (req, res, next) => {
   const { id } = req.params;
   const { userId, isAdmin } = req.auth;
@@ -81,14 +86,14 @@ exports.delete = (req, res, next) => {
     if (!result[0]) res.status(404).json({ message: "Le post n'existe pas" });
     else {
       if (result[0].authorId == userId || isAdmin) {
-        // SI LE POST A UNE IMAGE, LA SUPPRIMER DU DOSSIER IMAGES
+        // Supprime l'image dans le dossier Images
         if (result[0].imageUrl != "") {
           const name = result[0].imageUrl.split("/images/")[1];
           fs.unlink(`images/${name}`, () => {
             if (err) console.log(err);
           });
         }
-        // SUPPRIME LE POST DANS LA DB
+        // Supprime le post dans la BD
         let sql2 = `DELETE FROM post WHERE postId = ?`;
         pool.execute(sql2, [id], function (err, result) {
           if (err) throw err;
@@ -101,6 +106,7 @@ exports.delete = (req, res, next) => {
   });
 };
 
+// Récupérer les likes d'un post
 exports.liked = (req, res, next) => {
   const { userId } = req.auth;
 

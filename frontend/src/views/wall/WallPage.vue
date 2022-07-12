@@ -1,8 +1,12 @@
 <template>
+<!-- Composant de la page d'accueil -->
   <div class="wall-container">
     <div class="title">ACCUEIL</div>
+    <!-- Importation du composant de création de post -->
     <PostCard @refresh="refreshPosts" />
+    <!-- Parcourir les posts et les importer -->
     <div v-for="item in posts" :key="item.postId">
+      <!-- Importation du composant des posts créés -->
       <NewsCard :post="item" @refresh="refreshPosts" />
     </div>
   </div>

@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 
+// Middleware qui permet de décoder et d'utiliser le token de l'utilisateur connecté et de vérifié le status admin
 module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];

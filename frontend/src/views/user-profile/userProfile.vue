@@ -2,6 +2,7 @@
   <div class="wall-container">
     <div class="profile-container">
       <v-avatar>
+        <!-- Affichage du profil de l'utilisateur connecté -->
         <div class="own" v-if="userId === currentUser.id">
           <label for="image">
             <img class="ppChange" v-bind:src="user.pp" alt="pp" srcset="" />
@@ -20,6 +21,7 @@
             style="display: none"
           />
         </div>
+        <!-- Affichage du profil recherché -->
         <div v-else>
           <img class="ppFirst" :src="user.pp" alt="pp" srcset="" />
         </div>
@@ -42,6 +44,7 @@
     <div v-for="item in posts" :key="item.postId">
       <NewsCard :post="item" @refresh="refreshPosts" />
     </div>
+    <!-- Importation du composant pour la modification du profil -->
     <ModalEditAccount
       v-if="isOpenModal && user"
       titleBtn="Modifier"
@@ -89,6 +92,7 @@ export default {
       const res = await getUser(this.userId);
       this.user = res;
     },
+    // Modification de la photo de profil
     async modifPP(event) {
       const image = event.target.files[0];
       const fd = new FormData();

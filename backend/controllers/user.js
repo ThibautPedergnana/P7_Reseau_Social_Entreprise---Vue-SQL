@@ -2,6 +2,7 @@ const { pool } = require("../config/db");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 
+// Récupérer tout les user
 exports.getAll = (req, res, next) => {
   const search = "%" + req.query.search + "%";
 
@@ -17,6 +18,7 @@ exports.getAll = (req, res, next) => {
   });
 };
 
+// Récupérer tout les posts par user
 exports.getPostsByUser = (req, res, next) => {
   const { id } = req.params;
 
@@ -33,6 +35,7 @@ exports.getPostsByUser = (req, res, next) => {
   });
 };
 
+// Récupérer un user
 exports.getOne = (req, res, next) => {
   const { id } = req.params;
 
@@ -47,6 +50,7 @@ exports.getOne = (req, res, next) => {
   });
 };
 
+// Modifier les infos d'un user
 exports.updateAccount = (req, res, next) => {
   const { userId } = req.auth;
 
@@ -88,6 +92,7 @@ exports.updateAccount = (req, res, next) => {
   );
 };
 
+// Modifier le mot de passe d'un user
 exports.updatePassword = (req, res, next) => {
   const { userId } = req.auth;
   const { password, confirmPassword, oldPassword } = req.body;
@@ -131,6 +136,7 @@ exports.updatePassword = (req, res, next) => {
   );
 };
 
+// Supprimer un user
 exports.delete = (req, res, next) => {
   const { password } = req.body;
   const { userId } = req.auth;
@@ -172,6 +178,7 @@ exports.delete = (req, res, next) => {
   }
 };
 
+// Modifier la photo de profil d'un user
 exports.modifyPP = (req, res, next) => {
   const { userId } = req.auth;
   if (req.file) {

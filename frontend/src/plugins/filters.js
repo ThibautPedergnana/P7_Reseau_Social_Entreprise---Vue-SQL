@@ -1,5 +1,6 @@
 import Vue from "vue";
 
+// Gestion des dates
 Vue.filter("formatDate", (date) => {
   const newDate = new Date(date);
   const options = {

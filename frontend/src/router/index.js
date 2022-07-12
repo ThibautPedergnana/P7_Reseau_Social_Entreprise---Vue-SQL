@@ -20,6 +20,7 @@ const routes = [
   {
     path: "/",
     name: "Signup",
+    // Importer le layout sans barre de navigation uniquement sur la page Signup
     meta: { layout: "nosidebar" },
     component: SignUp,
   },
