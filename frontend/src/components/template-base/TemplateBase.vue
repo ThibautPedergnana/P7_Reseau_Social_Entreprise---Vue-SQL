@@ -29,4 +29,19 @@ export default {
 .container-base {
   width: 30%;
 }
+@media (max-width: 870px) {
+  .container-base {
+    width: 60%;
+  }
+}
+@media (max-width: 560px) {
+  .container-base {
+    width: 80%;
+  }
+}
+@media (max-width: 330px) {
+  .container-base {
+    width: 95%;
+  }
+}
 </style>

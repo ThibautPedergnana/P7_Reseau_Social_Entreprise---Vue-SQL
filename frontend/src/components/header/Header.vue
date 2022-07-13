@@ -7,8 +7,15 @@
           src="@/assets/icon-left-font-monochrome-white.png"
           alt="Logo du site"
         >
-        </v-img
-      ></v-toolbar-title>
+        </v-img>
+        <v-img
+          class="groupomania-logo"
+          src="@/assets/icon.png"
+          alt="Logo du site"
+        >
+        </v-img>
+      </v-toolbar-title>
+
       <v-spacer></v-spacer>
 
       <div class="search-container">
@@ -95,7 +102,10 @@ export default {
 }
 .title {
   cursor: pointer;
-  width: 10%;
+  width: 15%;
+  .groupomania-logo {
+    display: none;
+  }
 }
 
 .search-container {
@@ -105,7 +115,7 @@ export default {
     display: flex;
     .search {
       margin-top: 20px;
-      width: 230px;
+      max-width: 230px;
     }
   }
   .search-results {
@@ -144,5 +154,28 @@ export default {
 }
 i.v-icon.v-icon {
   color: white;
+}
+@media (max-width: 1000px) {
+  .title {
+    width: 20%;
+  }
+}
+@media (max-width: 900px) {
+  .title {
+    width: 25%;
+  }
+}
+@media (max-width: 560px) {
+  .title {
+    width: 10%;
+    min-width: 50px;
+    .groupomania {
+      display: none;
+    }
+    .groupomania-logo {
+      display: block;
+      color: white;
+    }
+  }
 }
 </style>

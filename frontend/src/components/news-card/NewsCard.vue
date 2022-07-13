@@ -12,7 +12,7 @@
 
         <v-list-item-content>
           <v-list-item-title>{{
-            `${postData.lastname} ${postData.firstname}`
+            `${postData.firstname} ${postData.lastname} `
           }}</v-list-item-title>
         </v-list-item-content>
         <div class="delete-post-btn">
@@ -74,8 +74,8 @@
             </div>
             <div class="user-section">
               <span class="username"
-                >{{ item.lastname }} {{ item.firstname }}</span
-              >
+                >{{ item.firstname }} {{ item.lastname }}
+              </span>
             </div>
             <div class="delete-section">
               <v-btn
@@ -259,7 +259,6 @@ export default {
         margin-bottom: 10px;
         .card-top-section {
           border-radius: 8px 8px 0 0;
-          padding: 5px;
           display: grid;
           grid-template-columns: repeat(12, 1fr);
           grid-gap: 5px;
@@ -268,12 +267,13 @@ export default {
           .img-section {
             grid-column: 1;
             grid-row: 1;
+            margin-top: 5px;
+            margin-left: 5px;
             .img-comment {
               width: 35px;
               height: 35px;
               border-radius: 50%;
               object-fit: cover;
-              margin-left: 5px;
             }
           }
           .user-section {
