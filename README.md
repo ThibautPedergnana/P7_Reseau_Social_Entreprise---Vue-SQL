@@ -1,4 +1,4 @@
-# -ThibautPedergnana_7_052022
+# -ThibautPedergnana_7_052022 | vue.js & mySQL
 
 ## Project setup
 ```
@@ -27,3 +27,4 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
