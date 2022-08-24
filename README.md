@@ -1,4 +1,6 @@
-# -ThibautPedergnana_7_052022 | vue.js & mySQL
+PROJET-07
+
+Réseau Social d'Entreprise avec Vue.js, Node.js et mySQL
 
 ## Project setup
 ```
