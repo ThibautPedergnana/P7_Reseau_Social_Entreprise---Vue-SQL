@@ -1,4 +1,4 @@
-## PROJET-07
+# PROJET-07 #
 
 Réseau Social d'Entreprise avec Vue.js, Node.js et mySQL
 
