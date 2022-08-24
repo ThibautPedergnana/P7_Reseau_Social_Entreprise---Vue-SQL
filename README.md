@@ -7,7 +7,7 @@ Ce projet est le dernier projet de la formation "Développeur Web" d'OpenClassro
 
 Grâce à ce projet j'ai pu découvrir le Framework front Vue.js ainsi que le service de base de donnée mySQL. J'ai aussi travaillé sur une gestion de token d'authentification pour sécuriser l'application.
 
-## Technologie utilisé
+## Technologies utilisées
 - HTML5
 - CSS3
 - JavaScript (ES6)
