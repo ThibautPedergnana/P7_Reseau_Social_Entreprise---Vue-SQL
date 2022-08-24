@@ -1,4 +1,4 @@
-# PROJET-07 - Groupomania #
+# PROJET-07 | Groupomania #
 
 Réseau Social d'Entreprise avec Vue.js, Node.js et mySQL
 
