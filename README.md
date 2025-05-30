@@ -1,4 +1,4 @@
-# Projet-4---Réseau social d'entreprise Groupomania | Vue - Node - mySQL #
+# Projet-7---Réseau social d'entreprise Groupomania | Vue - Node - mySQL #
 
 ## Résumé du projet
 Ce projet est le dernier projet de la formation "Développeur Web" d'OpenClassrooms. Ce projet consiste à construire un réseau social interne de A à Z, pour les employés de Groupomania. Le but de cet outil est de faciliter les interactions entre collègues.
